@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  capture-cloud:
+    stdin_open: true
+    cap_add:
+      - SYS_ADMIN
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "22:22"
+      - "80:80"
+    volumes:
+      - ./src:/app/src
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
